@@ -85,22 +85,26 @@ with st.expander("PROJECT DETAILS"):
     st.write('NN --> Neural Network')
     st.write('KN --> K-Neighbours')
 
+st.write("Random Forest accuracy ==> ", ml.rf_accuracy)
 with st.expander('EXAMPLE PHISHING URLs:'):
-    st.write('_https://zenn-80a30.firebaseapp.com/_')
-    st.write('_http://placement239394.didns.ru/_')
+    st.write('_http://facebook.ninjascrapers.com_')
+    st.write('_http://swapcakes.org_')
     st.write('_https://duddjuoduuwf.godaddysites.com/_')
     st.caption('REMEMBER, PHISHING WEB PAGES HAVE SHORT LIFECYCLE! SO, THE EXAMPLES SHOULD BE UPDATED!')
 
 choice = st.selectbox("Please select your machine learning model",
                  [
-                     'Gaussian Naive Bayes', 'Support Vector Machine', 'Decision Tree', 'Random Forest',
+                     'Random Forest','Gaussian Naive Bayes', 'Support Vector Machine', 'Decision Tree', 
                      'AdaBoost', 'Neural Network', 'K-Neighbours'
                  ]
                 )
 
 model = ml.nb_model
 
-if choice == 'Gaussian Naive Bayes':
+if choice == 'Random Forest':
+    model = ml.rf_model
+    st.write('RF model is selected!')
+elif choice == 'Gaussian Naive Bayes':
     model = ml.nb_model
     st.write('GNB model is selected!')
 elif choice == 'Support Vector Machine':
@@ -109,9 +113,6 @@ elif choice == 'Support Vector Machine':
 elif choice == 'Decision Tree':
     model = ml.dt_model
     st.write('DT model is selected!')
-elif choice == 'Random Forest':
-    model = ml.rf_model
-    st.write('RF model is selected!')
 elif choice == 'AdaBoost':
     model = ml.ab_model
     st.write('AB model is selected!')
@@ -130,6 +131,7 @@ if st.button('Check!'):
         response = re.get(url, verify=False, timeout=4)
         if response.status_code != 200:
             print(". HTTP connection was not successful for the URL: ", url)
+            st.write(" HTTP connection was not successful for the URL:",url)
         else:
             soup = BeautifulSoup(response.content, "html.parser")
             vector = [fe.create_vector(soup)]  # it should be 2d array, so I added []
@@ -143,6 +145,7 @@ if st.button('Check!'):
 
     except re.exceptions.RequestException as e:
         print("--> ", e)
+        st.write("Please check url...",url)
 
 
 
