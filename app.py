@@ -13,10 +13,10 @@ st.write('This ML-based app is developed for educational purposes. Objective of 
 st.title('Team Members')
 st.markdown(
 """
+- Kalaikovan P
+- Mouleeshwaran B
 - Munivel P
-- Elakkiya R
-- Kishore S
-- Benzee Patricia J
+- Naresh Kumar A
 """
 )
 
