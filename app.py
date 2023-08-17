@@ -15,8 +15,9 @@ st.markdown(
 """
 - Kalaikovan P
 - Mouleeshwaran B
-- Munivel P
-- Naresh Kumar A
+- Gokulnath N
+- Srisuryaprasanth S
+- Santhos M
 """
 )
 
